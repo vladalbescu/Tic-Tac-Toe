@@ -21,11 +21,12 @@ body {
   font-size: 6rem; }
   @media screen and (max-width: 500px) {
     .title {
-      font-size: 3rem; } }
+      font-size: 5rem; } }
 
 .message {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
   height: 2rem; }
 
 .gameboard {
@@ -65,8 +66,8 @@ body {
         font-size: 3rem; } }
   @media screen and (max-width: 1024px) {
     .gameboard {
-      grid-template-columns: repeat(3, 20vw);
-      grid-template-rows: repeat(3, 20vw); } }
+      grid-template-columns: repeat(3, 25vw);
+      grid-template-rows: repeat(3, 25vw); } }
 
 .play-again-popup {
   position: absolute;

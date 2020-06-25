@@ -12,21 +12,22 @@ let game = (() => {
   }
 
   function endGame(isDrawGame) {
-    let playAgainPopup = document.querySelector(".play-again-popup");
     let playAgainButton = document.querySelector(".play-again-popup__button");
-    let playAgainPopupMessage = document.querySelector(
-      ".play-again-popup__message"
-    );
 
     if (isDrawGame) {
-      playAgainPopupMessage.textContent = "It's a draw!";
+      displayController.changePopupMessage("It's a draw!");
     } else {
-      playAgainPopupMessage.textContent = `${this.currentPlayer.mark} has won the game!`;
+      displayController.changePopupMessage(
+        `${this.currentPlayer.mark} has won the game!`
+      );
     }
 
-    playAgainPopup.classList.remove("hidden");
+    setTimeout(function () {
+      displayController.togglePopup();
+    }, 500);
+
     playAgainButton.addEventListener("click", () => {
-      playAgainPopup.classList.add("hidden");
+      displayController.togglePopup();
       restartGame();
     });
   }
@@ -47,12 +48,22 @@ let game = (() => {
 
 let displayController = (() => {
   let message = document.querySelector(".message");
+  let popupMessage = document.querySelector(".play-again-popup__message");
+  let playAgainPopup = document.querySelector(".play-again-popup");
 
   function changeMessage(msg) {
     message.textContent = msg;
   }
 
-  return { changeMessage };
+  function togglePopup() {
+    playAgainPopup.classList.toggle("hidden");
+  }
+
+  function changePopupMessage(msg) {
+    popupMessage.textContent = msg;
+  }
+
+  return { changeMessage, changePopupMessage, togglePopup };
 })();
 
 let gameBoard = (() => {
