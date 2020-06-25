@@ -23,11 +23,12 @@ let game = (() => {
     }
 
     setTimeout(function () {
-      displayController.togglePopup();
+      displayController.showPopup();
     }, 500);
 
     playAgainButton.addEventListener("click", () => {
-      displayController.togglePopup();
+      console.log("Clicked!");
+      displayController.hidePopup();
       restartGame();
     });
   }
@@ -55,15 +56,19 @@ let displayController = (() => {
     message.textContent = msg;
   }
 
-  function togglePopup() {
-    playAgainPopup.classList.toggle("hidden");
+  function showPopup() {
+    playAgainPopup.classList.remove("hidden");
+  }
+
+  function hidePopup() {
+    playAgainPopup.classList.add("hidden");
   }
 
   function changePopupMessage(msg) {
     popupMessage.textContent = msg;
   }
 
-  return { changeMessage, changePopupMessage, togglePopup };
+  return { changeMessage, changePopupMessage, hidePopup, showPopup };
 })();
 
 let gameBoard = (() => {
@@ -76,6 +81,7 @@ let gameBoard = (() => {
     for (let i = 0; i < 9; i++) {
       cells[i].classList.remove("gameboard__cell--winner");
       cells[i].classList.remove("gameboard__cell--marked");
+      cells[i].classList.remove("gameboard__cell--zero");
 
       cells[i].innerHTML = gameBoardCells[i];
       cells[i].addEventListener("click", () => {
@@ -103,6 +109,10 @@ let gameBoard = (() => {
   function changeCellContent(cell, mark) {
     cell.innerHTML = mark;
     cell.classList.add("gameboard__cell--marked");
+
+    if (mark === "0") {
+      cell.classList.add("gameboard__cell--zero");
+    }
 
     let cellId = cell.getAttribute("data-id");
     gameBoardCells[cellId] = game.currentPlayer.mark;

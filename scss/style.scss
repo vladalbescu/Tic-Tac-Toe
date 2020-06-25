@@ -4,6 +4,7 @@ $color-3: #1c5d99;
 $color-4: #639fab;
 $color-5: #bbcde5;
 $color-winner: #64ffb9;
+$color-zero: #ff5d55;
 
 $main-font: "Gochi Hand", cursive;
 
@@ -71,13 +72,17 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 
-    transition: all 0.2s;
+    transition: box-shadow 0.2s;
 
     cursor: pointer;
 
     &--marked {
       cursor: not-allowed;
       box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3);
+    }
+
+    &--zero {
+      color: $color-zero;
     }
 
     &--winner {
